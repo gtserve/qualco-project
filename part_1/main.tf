@@ -44,9 +44,6 @@ resource "azurerm_eventhub_namespace" "namespace" {
   sku                 = "Standard"
   capacity            = 1 # Capacity / Throughput Units
 
-  #   # Enable Kafka API on the Event Hub
-  #   kafka_enabled = true
-
   # Security: Enable encryption and identity-based access
   identity {
     type = "SystemAssigned"
@@ -64,13 +61,6 @@ resource "azurerm_eventhub" "kafka_topics" {
   resource_group_name = azurerm_resource_group.rg.name
   partition_count     = var.partitions_per_topic
   message_retention   = 1 # Number of days to retain messages.
-
-  # capture_description {
-  #   enabled             = false
-  #   encoding            = "Avro"
-  #   interval_in_seconds = 300
-  #   size_limit_in_bytes = 10485763
-  # }
 }
 
 # Configure Private Endpoint for Event Hub
